@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxLengthValidator, MinLengthValidator
 
 class User(AbstractUser):
-    citizenId = models.IntegerField(unique=True, validators=[
+    citizen_id = models.IntegerField(unique=True, validators=[
         MaxLengthValidator(8),
         MinLengthValidator(8)
     ])

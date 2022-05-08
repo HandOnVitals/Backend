@@ -11,3 +11,6 @@ class Reading(models.Model):
     respiratory_rate = models.FloatField()
     oxygen_saturation = models.FloatField()
     blood_pressure = models.FloatField()
+
+    class Meta:
+        unique_together = ['user', 'datetime']
