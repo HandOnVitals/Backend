@@ -9,7 +9,7 @@ def score_scripts_path():
 class ScoreSystem(models.Model):
     name = models.CharField(max_length=50)
     spec = models.URLField()
-    script = models.FilePathField(path=score_scripts_path)
+    script_path = models.FilePathField(path=score_scripts_path)
 
     def __str__(self):
             return f"{self.name} score system"

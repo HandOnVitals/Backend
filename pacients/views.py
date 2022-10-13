@@ -4,15 +4,23 @@ from pacients.models import Pacient
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from readings.serializers import ReadingSerializer
+from rest_framework.permissions import IsAuthenticated
 
-class PacientData(APIView):
-    def get_object(self, pacient_health_number):
+
+class Pacients(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self, health_number: str):
         # import time
         # time.sleep(20)
-        return get_object_or_404(Pacient, health_number=pacient_health_number)
+        return get_object_or_404(Pacient, health_number=health_number)
 
-    def get(self, request, pacient_health_number, format=None):
-        pacient = self.get_object(pacient_health_number)
+    """
+    GET /pacients/<health_number>/readings
+    Retrieve all readings for pacient <health_number>
+    """
+    def get(self, request, health_number: str, format=None):
+        pacient = self.get_object(health_number)
         # Get the readings cronologically ordered (from most recent to oldest)
         readings = Reading.objects.filter(pacient=pacient).order_by('-datetime')
         serializer = ReadingSerializer(readings, many=True)

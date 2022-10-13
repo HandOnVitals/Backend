@@ -12,11 +12,11 @@ class Reading(models.Model):
     # Values
     temperature = models.FloatField()
     heart_rate = models.FloatField()
-    respiratory_rate = models.FloatField()
+    respiratory_rate = models.FloatField(null=True)
     blood_oxygen = models.FloatField()
     blood_pressure = models.FloatField()
 
-    scores = models.ManyToManyField(ScoreSystem, through='ScoreSystemReadingValue')
+    scores = models.ManyToManyField(ScoreSystem, through='ScoreSystemReading')
 
     class Meta:
         unique_together = ['pacient', 'datetime']
@@ -25,7 +25,7 @@ class Reading(models.Model):
         return f"Reading from {self.pacient} at {self.datetime}"
 
 
-class ScoreSystemReadingValue(models.Model):
+class ScoreSystemReading(models.Model):
     reading = models.ForeignKey(Reading, on_delete=models.CASCADE)
     score_system = models.ForeignKey(ScoreSystem, on_delete=models.CASCADE)
     

@@ -6,15 +6,11 @@ from rest_framework import status
 from readings.models import Reading
 from readings.serializers import ReadingSerializer
 
-class ReadingList(APIView):
+class Readings(APIView):
     """
-    List all readings, or create a new reading.
+    POST /readings
+    Create a new reading
     """
-    def get(self, request, format=None):
-        readings = Reading.objects.all()
-        serializer = ReadingSerializer(readings, many=True)
-        return Response(serializer.data)
-
     def post(self, request, format=None):
         serializer = ReadingSerializer(data=request.data)
         if serializer.is_valid():
@@ -23,26 +19,35 @@ class ReadingList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class ReadingDetail(APIView):
-    """
-    Retrieve, update or delete a reading instance.
-    """
+class ReadingsObject(APIView):
     def get_object(self, pk):
         return get_object_or_404(Reading, pk=pk)
 
-    def get(self, request, pk, format=None):
-        reading = self.get_object(pk)
+    """
+    GET /readings/<reading_id>
+    Get a reading
+    """
+    def get(self, request, reading_id, format=None):
+        reading = self.get_object(reading_id)
         serializer = ReadingSerializer(reading)
         return Response(serializer.data)
 
-    def put(self, request, pk, format=None):
-        reading = self.get_object(pk)
+    """
+    PUT /readings/<reading_id>
+    Update a reading
+    """
+    def put(self, request, reading_id, format=None):
+        reading = self.get_object(reading_id)
         serializer = ReadingSerializer(reading, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    """
+    DELETE /readings/<reading_id>
+    Delete a reading
+    """
     def delete(self, request, pk, format=None):
         reading = self.get_object(pk)
         reading.delete()

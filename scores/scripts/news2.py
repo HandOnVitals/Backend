@@ -1,5 +1,5 @@
 # https://www.cebm.net/wp-content/uploads/2020/04/Trish-1.jpg
-def main(heartRate, bloodPressure, temperature, bloodOxygen):
+def main(heartRate, bloodPressure, temperature, bloodOxygen, respiratoryRate):
     total = 0
     # Respiratory rate: not used
     pass
