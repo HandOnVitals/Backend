@@ -4,4 +4,4 @@ from handonvitals.settings import OTP_TIME
 
 class TwoFAToken(tokens.Token):
     token_type = "2fa"
-    lifetime = timedelta(seconds=OTP_TIME)
+    lifetime = timedelta(minutes=OTP_TIME)

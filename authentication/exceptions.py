@@ -13,7 +13,7 @@ class VerificationCodeSendingFailed(exceptions.APIException):
             code=code, *args, **kwargs)
 
 
-class VerificationCodeWrong(exceptions.APIException):
+class VerificationCodeInvalid(exceptions.APIException):
     status_code = status.HTTP_400_BAD_REQUEST
-    default_code = 'verification_code_wrong'
-    default_detail = _("Verification code is incorrect")
+    default_code = 'verification_code_invalid'
+    default_detail = _("Verification code is invalid (wrong or expired)")

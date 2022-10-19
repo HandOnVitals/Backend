@@ -111,11 +111,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Lisbon'
 
-USE_I18N = True
+USE_I18N = False
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -150,12 +150,17 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 100
 }
 
-import pyotp
-OTP_KEY = pyotp.random_base32()
-OTP_TIME = 60 # in seconds
+OTP_TIME = 20 # in minutes
+HASH_SALT = os.getenv('HASH_SALT', '868afc5a0142436b987d96a31c7d0f14')
 
 # Currently emails are not sent because it is not configured
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'noreply@handonvitals.com'
 DEFAULT_FROM_EMAIL = EMAIL_HOST
+
+SIMPLE_JWT = {
+    "TOKEN_REFRESH_SERIALIZER": "authentication.serializers.TokenRefreshSerializer"
+}
+
+DEFAULT_CHARSET = 'utf-8'
