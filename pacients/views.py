@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class Pacients(APIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get_object(self, health_number: str):
         # import time
