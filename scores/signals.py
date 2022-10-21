@@ -1,11 +1,11 @@
 import importlib
-from django.db.models.signals import pre_save
+from django.db.models.signals import post_save
 from django.dispatch import receiver
 from scores.models import ScoreSystem
 from readings.models import Reading, ScoreSystemReading
 
-@receiver(pre_save, sender=Reading, dispatch_uid='calculate_scores')
-def calculate_scores(sender, instance: Reading, raw, using, update_fields, **kwargs):
+@receiver(post_save, sender=Reading, dispatch_uid='calculate_scores')
+def calculate_scores(sender, instance: Reading, created, raw, using, update_fields, **kwargs):
     score_systems = ScoreSystem.objects.all()
     for score_system in score_systems:
         spec = importlib.util.spec_from_file_location(score_system.name, score_system.script_path)

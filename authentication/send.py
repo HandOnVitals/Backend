@@ -10,7 +10,7 @@ from authentication.exceptions import VerificationCodeSendingFailed
 from authentication.helpers import hash_code
 from authentication.models import OTP
 from authentication.token import TwoFAToken
-from handonvitals.settings import DEFAULT_CHARSET, HASH_SALT, OTP_TIME
+from handonvitals.settings import OTP_TIME
 
 
 class CodeSendingFailed(Exception):

@@ -5,7 +5,7 @@ HEALTH_NUMBER_DIGITS = 9
 
 # Create your models here.
 class Pacient(models.Model):
-    full_name = models.TextField(null=False, blank=False)
+    full_name = models.TextField(null=True)
     health_number = models.CharField(max_length=9, unique=True, validators=[
         MaxLengthValidator(9),
         MinLengthValidator(9),

@@ -9,6 +9,7 @@ class Reading(models.Model):
     device = models.ForeignKey(to=Device, on_delete=models.SET_NULL, null=True)
 
     datetime = models.DateTimeField()
+    add_date = models.DateTimeField(auto_now_add=True)
     # Values
     temperature = models.FloatField()
     heart_rate = models.FloatField()

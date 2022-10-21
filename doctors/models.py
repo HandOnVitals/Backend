@@ -30,7 +30,7 @@ class UserManager(BaseUserManager):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_active', True)
-        extra_fields.setdefault('ballot', '00000')
+        extra_fields.setdefault('ballot', 'ADMIN')
 
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Superuser must have is_staff=True.')
@@ -55,5 +55,6 @@ class User(AbstractUser):
     #     MaxLengthValidator(8),
     #     MinLengthValidator(8)
     # ])
-    ballot = models.CharField(max_length=5, unique=True, validators=[MinLengthValidator(1)])
+    ballot = models.CharField(verbose_name='Número de cédula profissional', max_length=5, unique=True, validators=[MinLengthValidator(1)])
+    title = models.CharField(choices=(('Dr.', 'Doutor'), ('Dra.', 'Doutora')), max_length=5)
     # TODO: Remove unecessary fields
